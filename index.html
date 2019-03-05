@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <title>Lightbulb</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="icon" type="image/png" href="/media/logo.png">
+    <script src="vue.js"></script>
+    <script src="mqtt.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="title">
+            <h1>
+                <a href="/">
+                    <img src="media/logo.png" style="width: auto; height: 2em; border-radius: 10px;" alt="pixled">
+                    <img src="media/pixled.png" style="width: auto; height: 2em; border-radius: 10px;" alt="pixled">
+                </a>
+            </h1>
+        </div>
+        <br style="clear:both;" />
+        <div class="divButtonHeader" id="divButtonHeaderVue">
+            <menu-item v-for="item in menuItems" v-bind:item="item" v-bind:key="item.id" v-bind:id="item.id"></menu-item>
+        </div>
+    </header>
+
+
+    <center>
+
+        <div id="divAddButton" style="display: none" class="addButton">
+            <br>
+            <button id="addButton" class="buttonAdd">
+                <img src="media/add.png" style="display: flex;" class="imgAdd">
+            </button>
+            <br>
+            <br>
+        </div>
+
+        <div id="divFormAddItem" class="divFormAddItem" style="display: none">
+            <form id="formAddItem">
+            </form>
+        </div>
+
+        <!-- component template -->
+        <script type="text/x-template" id="components-grid-template">
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="key in columns" :class="{ active: sortKey == key }">
+                            {{ key | capitalize }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="entry in filteredData">
+                        <td v-for="key in columns">
+                            <span v-bind:id="'span_' + key + '_' + entry[columns[0]]">
+                                <button v-bind:id="'button_' + key + '_'  + entry[columns[0]]">
+                                    <img v-bind:id="'img_' + key + '_'  + entry[columns[0]]" style="display: none;">
+                                    <span>
+                                        {{entry[key]}}
+                                    </span>
+                            </button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </script>
+
+        <!-- demo root element -->
+        <div id="components" class="idTable">
+            <components-grid :data="gridData" :columns="gridColumns" :filter-key="searchQuery">
+            </components-grid>
+        </div>
+
+    </center>
+
+    <script src="ajax.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
