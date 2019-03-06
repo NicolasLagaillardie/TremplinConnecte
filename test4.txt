@@ -1,0 +1,3 @@
+73 Accelerometer Test
+
+Ooops, no LSM303 detected ... Check your wiring!

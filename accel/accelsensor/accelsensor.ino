@@ -26,7 +26,7 @@ void setup(void)
 #ifndef ESP8266
   while (!Serial);     // will pause Zero, Leonardo, etc until serial console opens
 #endif
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Accelerometer Test"); Serial.println("");
 
   /* Initialise the sensor */
@@ -48,9 +48,10 @@ void loop(void)
   accel.getEvent(&event);
 
   /* Display the results (acceleration is measured in m/s^2) */
-  Serial.print(event.acceleration.x * 12); Serial.print("         ");
-  Serial.print(event.acceleration.y * 12); Serial.print("         ");
-  Serial.print(event.acceleration.z * 12); Serial.print("         "); Serial.println("");
+  Serial.print(millis()); Serial.print(" ");
+  Serial.print(event.acceleration.x * 12); Serial.print(" ");
+  Serial.print(event.acceleration.y * 12); Serial.print(" ");
+  Serial.print(event.acceleration.z * 12); Serial.print(" "); Serial.println("");
 
   /* Note: You can also get the raw (non unified values) for */
   /* the last data sample as follows. The .getEvent call populates */
@@ -58,7 +59,4 @@ void loop(void)
   //Serial.print("X Raw: "); Serial.print(accel.raw.x); Serial.print("  ");
   //Serial.print("Y Raw: "); Serial.print(accel.raw.y); Serial.print("  ");
   //Serial.print("Z Raw: "); Serial.print(accel.raw.z); Serial.println("");
-
-  /* Delay before the next sample */
-  delay(1);
 }
